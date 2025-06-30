@@ -1,0 +1,182 @@
+# SKIMPY Token Project - Progress Tracker
+
+**Last Updated:** 2025-06-30  
+**Status:** ✅ GitHub & Discord Integration Complete
+
+---
+
+## 🎯 Project Overview
+
+SKIMPY is a sandbox ERC-20 token project for learning smart contract development, GitHub workflows, and Discord integrations. This serves as a public learning lab and proof of capability.
+
+- **Repository:** https://github.com/rezurx/Skimpy-Token
+- **Token Contract:** `contracts/Skimpy.sol` (ERC-20, 1M supply, burn function)
+- **Framework:** Hardhat
+- **Network:** Ethereum-compatible
+
+---
+
+## 📋 Completed Tasks
+
+### ✅ Phase 1: Core Setup (2025-06-30)
+- [x] **Git Repository Initialization**
+  - Initialized local git repo with all project files
+  - Created initial commit with complete project structure
+  - Set up `main` branch (renamed from `master`)
+
+- [x] **GitHub Integration**
+  - Connected local repo to GitHub: https://github.com/rezurx/Skimpy-Token
+  - Successfully pushed all code to remote repository
+  - Repository is private as intended
+
+- [x] **Discord Webhook Setup**
+  - Created Discord webhook integration
+  - Added webhook URL to `.env.example` template
+  - Built `scripts/discord-notify.js` for programmatic notifications
+  - Configured `.env` file with actual webhook URL
+  - ✅ **Tested successfully** - Discord notifications working
+
+### ✅ Phase 2: Automation (2025-06-30)
+- [x] **Git Automation Script**
+  - Created `scripts/git-commit.sh` - one-command git workflow
+  - Script handles: staging → commit → push → Discord notify
+  - Made executable with proper error handling
+  - ✅ **Tested successfully** - Full workflow automation working
+
+- [x] **GitHub Actions Setup**  
+  - Created `.github/workflows/discord-notify.yml`
+  - Auto-notifications for pushes and pull requests
+  - Configured to use GitHub Secrets for webhook URL
+  - Supports rich Discord messages with commit details and links
+
+---
+
+## 🔧 Current Automation Workflows
+
+### Local Development Workflow
+```bash
+# Make changes to code
+./scripts/git-commit.sh "Your commit message"
+# ↳ Automatically: stages, commits, pushes, notifies Discord
+```
+
+### GitHub Actions (Auto-triggered)
+- **On Push to `main`:** Sends detailed Discord notification with commit info
+- **On Pull Request:** Sends PR notification to Discord
+- Uses `DISCORD_WEBHOOK_URL` secret (needs to be configured in GitHub repo settings)
+
+---
+
+## 📁 Key Files Added/Modified
+
+### New Files Created
+- `scripts/discord-notify.js` - Discord notification utility
+- `scripts/git-commit.sh` - Automated git workflow script  
+- `.github/workflows/discord-notify.yml` - GitHub Actions workflow
+- `PROGRESS.md` - This progress tracking file
+
+### Modified Files
+- `.env.example` - Added Discord webhook URL template
+- `.env` - Configured with actual webhook URL (gitignored)
+
+---
+
+## 🔗 Integration Details
+
+### Discord Webhook
+- **URL:** `https://discord.com/api/webhooks/1389261734099025960/...` (stored in `.env`)
+- **Bot Name:** "SKIMPY Bot" / "SKIMPY GitHub Bot"
+- **Functionality:** Manual notifications + automatic GitHub push/PR alerts
+
+### GitHub Repository
+- **Original URL:** `https://github.com/rezurx/skimpy-token`
+- **Actual URL:** `https://github.com/rezurx/Skimpy-Token` (auto-capitalized)
+- **Privacy:** Private repository
+- **Default Branch:** `main`
+
+---
+
+## 🎛️ Environment Setup
+
+### Required Environment Variables (`.env`)
+```bash
+# Discord Integration
+DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/...
+
+# Blockchain Development (for future use)
+ALCHEMY_API_KEY=your-alchemy-api-key-here
+PRIVATE_KEY=your-private-key-here
+BASESCAN_API_KEY=your-basescan-api-key-here
+```
+
+### GitHub Secrets (for Actions)
+- `DISCORD_WEBHOOK_URL` - Same webhook URL for automated notifications
+
+---
+
+## 📊 Project Status Dashboard
+
+| Component | Status | Notes |
+|-----------|--------|-------|
+| ERC-20 Contract | ✅ Complete | Basic token with burn function |
+| Git Repository | ✅ Complete | Local + GitHub sync working |
+| Discord Integration | ✅ Complete | Manual + auto notifications |
+| GitHub Actions | ✅ Complete | Auto Discord alerts on push/PR |
+| Automation Scripts | ✅ Complete | One-command git workflow |
+| Documentation | ✅ Complete | README, setup guides, progress tracking |
+| Testing Suite | 🔄 Basic | Has test file, needs expansion |
+| Contract Deployment | ⏳ Pending | Ready for testnet deployment |
+| Faucet Bot | ⏳ Planned | Discord bot for token distribution |
+| Burn Vault Design | ⏳ Planned | Advanced tokenomics features |
+
+---
+
+## 🚀 Next Steps / Roadmap
+
+### Immediate (Next Session)
+- [ ] Expand test suite coverage
+- [ ] Deploy to testnet (Base/Sepolia)
+- [ ] Set up contract verification on explorer
+
+### Short Term
+- [ ] Build Discord faucet bot
+- [ ] Add burn vault mechanism
+- [ ] Create governance prototype
+
+### Long Term  
+- [ ] Reputation-Splitting Tokens (RST) integration
+- [ ] Advanced tokenomics (demurrage, decay)
+- [ ] DAO governance features
+
+---
+
+## 🔍 For Future AI/CLI Reference
+
+### Current Workflow
+1. Developer makes changes locally
+2. Runs `./scripts/git-commit.sh "message"` 
+3. Script automatically handles git operations + Discord notification
+4. GitHub Actions trigger additional Discord alerts
+5. All changes are tracked in git history
+
+### Key Commands
+```bash
+# Quick commit and push
+./scripts/git-commit.sh "Your commit message"
+
+# Manual Discord notification  
+node scripts/discord-notify.js "Custom message"
+
+# Standard git operations still work
+git status
+git log --oneline
+```
+
+### Integration Points
+- **Discord Channel:** Configured webhook for automated project updates
+- **GitHub Repo:** https://github.com/rezurx/Skimpy-Token (private)
+- **Local Project:** `/home/resurx/blockchain-projects/skimpy-token/`
+
+---
+
+**Note:** This progress file should be updated after major milestones or significant changes to the project workflow.
