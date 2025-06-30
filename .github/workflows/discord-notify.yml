@@ -1,0 +1,62 @@
+name: Discord Notifications
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Send Discord notification on push
+      if: github.event_name == 'push'
+      env:
+        DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      run: |
+        node -e "
+        const webhook = process.env.DISCORD_WEBHOOK_URL;
+        if (!webhook) { console.log('No webhook URL configured'); process.exit(0); }
+        
+        fetch(webhook, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            content: '🚀 **SKIMPY Token Update**\n\`\`\`\nCommit: ${{ github.event.head_commit.message }}\nAuthor: ${{ github.event.head_commit.author.name }}\nRepo: ${{ github.repository }}\n\`\`\`\n[View Changes](${{ github.event.head_commit.url }})',
+            username: 'SKIMPY GitHub Bot'
+          })
+        }).then(r => console.log('Discord notification sent!'))
+        .catch(e => console.log('Failed to send notification:', e));
+        "
+    
+    - name: Send Discord notification on PR
+      if: github.event_name == 'pull_request'
+      env:
+        DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      run: |
+        node -e "
+        const webhook = process.env.DISCORD_WEBHOOK_URL;
+        if (!webhook) { console.log('No webhook URL configured'); process.exit(0); }
+        
+        fetch(webhook, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            content: '📋 **New Pull Request**\n\`\`\`\nTitle: ${{ github.event.pull_request.title }}\nAuthor: ${{ github.event.pull_request.user.login }}\nRepo: ${{ github.repository }}\n\`\`\`\n[View PR](${{ github.event.pull_request.html_url }})',
+            username: 'SKIMPY GitHub Bot'
+          })
+        }).then(r => console.log('Discord notification sent!'))
+        .catch(e => console.log('Failed to send notification:', e));
+        "
