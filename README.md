@@ -1,5 +1,10 @@
 # SKIMPY Token
 
+> ⚠️ **Disclaimer**  
+This is an experimental project intended for education and personal development.  
+SKIMPY Token (SKMP) is not promoted, marketed, or intended for public use — but it is deployed on a public blockchain and permissionless by nature.  
+Use at your own risk. No roadmap, utility, or support is provided.
+
 SKIMPY is a **sandbox token project** for exploring smart contract development, tokenomics experimentation, and decentralized identity mechanics. This is not a product or launchpad — it's a **public learning lab**.
 
 ---
