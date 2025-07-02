@@ -1,7 +1,7 @@
 # SKIMPY Token Project - Progress Tracker
 
 **Last Updated:** 2025-07-02  
-**Status:** ✅ GitHub & Discord Integration Complete
+**Status:** 🚧 Faucet Bot Development In Progress
 
 ---
 
@@ -74,10 +74,20 @@ SKIMPY is a sandbox ERC-20 token project for learning smart contract development
 - `scripts/git-commit.sh` - Automated git workflow script  
 - `.github/workflows/discord-notify.yml` - GitHub Actions workflow
 - `PROGRESS.md` - This progress tracking file
+- `DISCLAIMER.md` - Legal disclaimer for the project
+- `contracts/BurnVault.sol` - Contract to hold burned tokens
+- `scripts/deploy-with-vault.js` - Deployment script for Skimpy and BurnVault
+- `scripts/faucet-bot/index.js` - Main file for the Discord faucet bot
+- `scripts/faucet-bot/package.json` - Node.js package file for the faucet bot
+- `scripts/faucet-bot/package-lock.json` - Lock file for faucet bot dependencies
 
 ### Modified Files
-- `.env.example` - Added Discord webhook URL template
+- `.env.example` - Added Discord webhook URL template and faucet bot configuration
 - `.env` - Configured with actual webhook URL (gitignored)
+- `README.md` - Added a disclaimer to the top of the file
+- `test/skimpy.test.js` - Added tests for the `burn` function and updated for BurnVault integration
+- `scripts/deploy.js` - Automated contract verification
+- `contracts/Skimpy.sol` - Modified to integrate with BurnVault
 
 ---
 
@@ -126,22 +136,20 @@ BASESCAN_API_KEY=your-basescan-api-key-here
 | Documentation | ✅ Complete | README, setup guides, progress tracking |
 | Testing Suite | ✅ Complete | Expanded with tests for the `burn` function |
 | Contract Deployment | ✅ Complete | Automated deployment and verification |
-| Faucet Bot | ⏳ Planned | Discord bot for token distribution |
-| Burn Vault Design | ⏳ Planned | Advanced tokenomics features |
+| Faucet Bot | 🚧 In Progress | Discord bot for token distribution |
+| Burn Vault Design | ✅ Complete | Advanced tokenomics features |
 
 ---
 
 ## 🚀 Next Steps / Roadmap
 
 ### Immediate (Next Session)
-- [ ] Build Discord faucet bot
-- [ ] Add burn vault mechanism
 - [ ] Create governance prototype
 
 ### Short Term
-- [ ] Build Discord faucet bot
-- [ ] Add burn vault mechanism
-- [ ] Create governance prototype
+- [ ] Build Discord faucet bot (continue development)
+- [ ] Advanced tokenomics (demurrage, decay)
+- [ ] Reputation-Splitting Tokens (RST) integration
 
 ### Long Term  
 - [ ] Reputation-Splitting Tokens (RST) integration
@@ -188,3 +196,5 @@ git log --oneline
 *   **Added Disclaimers:** Created a `DISCLAIMER.md` file and added a disclaimer to the `README.md` to clarify the project's experimental nature.
 *   **Expanded Test Coverage:** Added tests for the `burn` function in `test/skimpy.test.js`, improving the robustness of the test suite.
 *   **Automated Contract Verification:** Updated the `scripts/deploy.js` script to automatically verify the contract on Basescan after deployment, streamlining the deployment process.
+*   **Burn Vault Implementation:** Created `contracts/BurnVault.sol`, modified `contracts/Skimpy.sol` to integrate with it, updated tests, and created a new deployment script `scripts/deploy-with-vault.js`.
+*   **Faucet Bot Setup:** Initialized the Discord faucet bot project, created `scripts/faucet-bot/index.js`, and updated `.env.example` with necessary environment variables.
