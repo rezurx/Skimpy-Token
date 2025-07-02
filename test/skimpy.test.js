@@ -3,15 +3,29 @@ const { ethers } = require("hardhat");
 
 describe("Skimpy", function () {
   let skimpy;
+  let burnVault;
   let owner;
   let addr1;
   let addr2;
 
   beforeEach(async function () {
     [owner, addr1, addr2] = await ethers.getSigners();
-    
+
     const Skimpy = await ethers.getContractFactory("Skimpy");
-    skimpy = await Skimpy.deploy();
+    const BurnVault = await ethers.getContractFactory("BurnVault");
+
+    // Deploy Skimpy first to get its address
+    const initialSkimpy = await Skimpy.deploy("0x0000000000000000000000000000000000000001"); // Dummy address
+    await initialSkimpy.waitForDeployment();
+    const skimpyAddress = await initialSkimpy.getAddress();
+
+    // Deploy BurnVault with the Skimpy address
+    burnVault = await BurnVault.deploy(skimpyAddress);
+    await burnVault.waitForDeployment();
+    const burnVaultAddress = await burnVault.getAddress();
+
+    // Now deploy the final Skimpy contract with the real BurnVault address
+    skimpy = await Skimpy.deploy(burnVaultAddress);
     await skimpy.waitForDeployment();
   });
 
@@ -31,6 +45,10 @@ describe("Skimpy", function () {
 
     it("Should have 18 decimals", async function () {
       expect(await skimpy.decimals()).to.equal(18);
+    });
+
+    it("Should set the correct burn vault address", async function () {
+      expect(await skimpy.burnVault()).to.equal(await burnVault.getAddress());
     });
   });
 
@@ -57,18 +75,18 @@ describe("Skimpy", function () {
   });
 
   describe("Burns", function () {
-    it("Should burn tokens from the owner", async function () {
+    it("Should transfer tokens to the burn vault", async function () {
       const burnAmount = ethers.parseEther("100");
       const initialOwnerBalance = await skimpy.balanceOf(owner.address);
-      const initialTotalSupply = await skimpy.totalSupply();
+      const initialVaultBalance = await skimpy.balanceOf(await burnVault.getAddress());
 
       await skimpy.burn(burnAmount);
 
       const finalOwnerBalance = await skimpy.balanceOf(owner.address);
-      const finalTotalSupply = await skimpy.totalSupply();
+      const finalVaultBalance = await skimpy.balanceOf(await burnVault.getAddress());
 
       expect(finalOwnerBalance).to.equal(initialOwnerBalance - burnAmount);
-      expect(finalTotalSupply).to.equal(initialTotalSupply - burnAmount);
+      expect(finalVaultBalance).to.equal(initialVaultBalance + burnAmount);
     });
 
     it("Should fail if trying to burn more than balance", async function () {
