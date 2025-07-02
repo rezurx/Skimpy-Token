@@ -1,6 +1,6 @@
 # SKIMPY Token Project - Progress Tracker
 
-**Last Updated:** 2025-06-30  
+**Last Updated:** 2025-07-02  
 **Status:** ✅ GitHub & Discord Integration Complete
 
 ---
@@ -124,8 +124,8 @@ BASESCAN_API_KEY=your-basescan-api-key-here
 | GitHub Actions | ✅ Complete | Auto Discord alerts on push/PR |
 | Automation Scripts | ✅ Complete | One-command git workflow |
 | Documentation | ✅ Complete | README, setup guides, progress tracking |
-| Testing Suite | 🔄 Basic | Has test file, needs expansion |
-| Contract Deployment | ⏳ Pending | Ready for testnet deployment |
+| Testing Suite | ✅ Complete | Expanded with tests for the `burn` function |
+| Contract Deployment | ✅ Complete | Automated deployment and verification |
 | Faucet Bot | ⏳ Planned | Discord bot for token distribution |
 | Burn Vault Design | ⏳ Planned | Advanced tokenomics features |
 
@@ -134,9 +134,9 @@ BASESCAN_API_KEY=your-basescan-api-key-here
 ## 🚀 Next Steps / Roadmap
 
 ### Immediate (Next Session)
-- [ ] Expand test suite coverage
-- [ ] Deploy to testnet (Base/Sepolia)
-- [ ] Set up contract verification on explorer
+- [ ] Build Discord faucet bot
+- [ ] Add burn vault mechanism
+- [ ] Create governance prototype
 
 ### Short Term
 - [ ] Build Discord faucet bot
@@ -180,3 +180,11 @@ git log --oneline
 ---
 
 **Note:** This progress file should be updated after major milestones or significant changes to the project workflow.
+
+---
+
+## ✨ Recent Accomplishments (2025-07-02)
+
+*   **Added Disclaimers:** Created a `DISCLAIMER.md` file and added a disclaimer to the `README.md` to clarify the project's experimental nature.
+*   **Expanded Test Coverage:** Added tests for the `burn` function in `test/skimpy.test.js`, improving the robustness of the test suite.
+*   **Automated Contract Verification:** Updated the `scripts/deploy.js` script to automatically verify the contract on Basescan after deployment, streamlining the deployment process.
