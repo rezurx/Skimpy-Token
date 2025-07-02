@@ -1,4 +1,4 @@
-const { ethers } = require("hardhat");
+const { ethers, run, network } = require("hardhat");
 
 async function main() {
   console.log("🚀 Starting Skimpy Token deployment...\n");
@@ -33,11 +33,27 @@ async function main() {
   console.log("Total Supply:", ethers.formatEther(totalSupply), "SKMP");
   console.log("Deployer Balance:", ethers.formatEther(deployerBalance), "SKMP");
   
-  console.log("\n🔗 Next Steps:");
-  console.log("1. Verify contract on Basescan:");
-  console.log(`   npx hardhat verify --network ${network.name} ${contractAddress}`);
-  console.log("2. Add token metadata on Basescan");
-  console.log("3. Optional: Create Aerodrome liquidity pool");
+  // Wait for block confirmations and then verify
+  if (network.config.chainId !== 31337 && process.env.BASESCAN_API_KEY) {
+    console.log("\n⏳ Waiting for block confirmations...");
+    await skimpy.deploymentTransaction().wait(6);
+    console.log("✅ Block confirmations received.");
+
+    console.log("\n🔍 Verifying contract on Basescan...");
+    try {
+      await run("verify:verify", {
+        address: contractAddress,
+        constructorArguments: [],
+      });
+      console.log("✅ Contract verified successfully!");
+    } catch (error) {
+      if (error.message.toLowerCase().includes("already verified")) {
+        console.log("✅ Contract is already verified.");
+      } else {
+        console.error("❌ Verification failed:", error);
+      }
+    }
+  }
   
   console.log("\n💾 Save this contract address:", contractAddress);
 }
