@@ -55,4 +55,29 @@ describe("Skimpy", function () {
       expect(await skimpy.balanceOf(owner.address)).to.equal(initialOwnerBalance);
     });
   });
+
+  describe("Burns", function () {
+    it("Should burn tokens from the owner", async function () {
+      const burnAmount = ethers.parseEther("100");
+      const initialOwnerBalance = await skimpy.balanceOf(owner.address);
+      const initialTotalSupply = await skimpy.totalSupply();
+
+      await skimpy.burn(burnAmount);
+
+      const finalOwnerBalance = await skimpy.balanceOf(owner.address);
+      const finalTotalSupply = await skimpy.totalSupply();
+
+      expect(finalOwnerBalance).to.equal(initialOwnerBalance - burnAmount);
+      expect(finalTotalSupply).to.equal(initialTotalSupply - burnAmount);
+    });
+
+    it("Should fail if trying to burn more than balance", async function () {
+      const initialOwnerBalance = await skimpy.balanceOf(owner.address);
+      const burnAmount = initialOwnerBalance + ethers.parseEther("1");
+
+      await expect(
+        skimpy.burn(burnAmount)
+      ).to.be.revertedWithCustomError(skimpy, "ERC20InsufficientBalance");
+    });
+  });
 });
