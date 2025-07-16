@@ -22,7 +22,7 @@ async function main() {
   const burnVaultAddress = await burnVault.getAddress();
   console.log("✅ BurnVault deployed to:", burnVaultAddress);
 
-  const skimpy = await Skimpy.deploy(burnVaultAddress);
+  const skimpy = await Skimpy.deploy(burnVaultAddress, deployer.address);
   await skimpy.waitForDeployment();
   const skimpyAddress = await skimpy.getAddress();
   console.log("✅ Skimpy Token deployed to:", skimpyAddress);
@@ -39,10 +39,15 @@ async function main() {
   const timelockAddress = await timelock.getAddress();
   console.log("✅ SkimpyTimelock deployed to:", timelockAddress);
 
+  // Transfer ownership of Skimpy to Timelock
+  console.log("\n🔐 Transferring ownership of Skimpy to Timelock...");
+  await skimpy.transferOwnership(timelockAddress);
+  console.log("✅ Ownership of Skimpy transferred to Timelock.");
+
   // Deploy SkimpyGovernor
   console.log("\n📄 Deploying SkimpyGovernor contract...");
   const SkimpyGovernor = await ethers.getContractFactory("SkimpyGovernor");
-  const governor = await SkimpyGovernor.deploy(skimpyAddress);
+  const governor = await SkimpyGovernor.deploy(skimpyAddress, timelockAddress);
   await governor.waitForDeployment();
   const governorAddress = await governor.getAddress();
   console.log("✅ SkimpyGovernor deployed to:", governorAddress);
@@ -51,7 +56,7 @@ async function main() {
   console.log("\n🔐 Granting roles in Timelock...");
   const proposerRole = await timelock.PROPOSER_ROLE();
   const executorRole = await timelock.EXECUTOR_ROLE();
-  const adminRole = await timelock.TIMELOCK_ADMIN_ROLE();
+  const adminRole = await timelock.DEFAULT_ADMIN_ROLE();
 
   await timelock.grantRole(proposerRole, governorAddress);
   console.log(`Granted PROPOSER_ROLE to Governor at ${governorAddress}`);
@@ -72,9 +77,10 @@ async function main() {
     console.log("✅ Block confirmations received.");
 
     console.log("\n🔍 Verifying contracts on Etherscan...");
-    await run("verify:verify", { address: skimpyAddress, constructorArguments: [burnVaultAddress] });
+    await run("verify:verify", { address: burnVaultAddress, constructorArguments: [ethers.ZeroAddress] });
+    await run("verify:verify", { address: skimpyAddress, constructorArguments: [burnVaultAddress, deployer.address] });
     await run("verify:verify", { address: timelockAddress, constructorArguments: [minDelay, proposers, executors, admin] });
-    await run("verify:verify", { address: governorAddress, constructorArguments: [skimpyAddress] });
+    await run("verify:verify", { address: governorAddress, constructorArguments: [skimpyAddress, timelockAddress] });
   }
 
   console.log("\n🎉 Governance System Deployed! 🎉");

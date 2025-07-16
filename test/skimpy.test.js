@@ -14,18 +14,13 @@ describe("Skimpy", function () {
     const Skimpy = await ethers.getContractFactory("Skimpy");
     const BurnVault = await ethers.getContractFactory("BurnVault");
 
-    // Deploy Skimpy first to get its address
-    const initialSkimpy = await Skimpy.deploy("0x0000000000000000000000000000000000000001"); // Dummy address
-    await initialSkimpy.waitForDeployment();
-    const skimpyAddress = await initialSkimpy.getAddress();
-
-    // Deploy BurnVault with the Skimpy address
-    burnVault = await BurnVault.deploy(skimpyAddress);
+    // Deploy BurnVault with dummy address first
+    burnVault = await BurnVault.deploy(ethers.ZeroAddress);
     await burnVault.waitForDeployment();
     const burnVaultAddress = await burnVault.getAddress();
 
-    // Now deploy the final Skimpy contract with the real BurnVault address
-    skimpy = await Skimpy.deploy(burnVaultAddress);
+    // Deploy Skimpy contract with BurnVault address and owner
+    skimpy = await Skimpy.deploy(burnVaultAddress, owner.address);
     await skimpy.waitForDeployment();
   });
 

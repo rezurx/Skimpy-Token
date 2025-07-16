@@ -16,7 +16,7 @@ describe("SkimpyGovernor", function () {
 
     // Deploy Skimpy
     const Skimpy = await ethers.getContractFactory("Skimpy");
-    skimpy = await Skimpy.deploy(burnVaultAddress);
+    skimpy = await Skimpy.deploy(burnVaultAddress, owner.address);
     await skimpy.waitForDeployment();
     const skimpyAddress = await skimpy.getAddress();
 
@@ -28,7 +28,7 @@ describe("SkimpyGovernor", function () {
 
     // Deploy SkimpyGovernor
     const SkimpyGovernor = await ethers.getContractFactory("SkimpyGovernor");
-    governor = await SkimpyGovernor.deploy(skimpyAddress);
+    governor = await SkimpyGovernor.deploy(skimpyAddress, timelockAddress);
     await governor.waitForDeployment();
     const governorAddress = await governor.getAddress();
 
