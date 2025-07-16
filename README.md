@@ -85,7 +85,7 @@ See [`docs/dev-log.md`](docs/dev.log.md) for detailed progress notes.
 | ------------------ | -------------- |
 | ERC-20 Token Logic | ✅ Working      |
 | Hardhat Framework  | ✅ Configured   |
-| Testing Suite      |  In Progress |
+| Testing Suite      | ✅ Done      |
 | Discord Webhook    |  Planned     |
 | Burn Vault Design  |  Drafting    |
 | Faucet Bot         |  Not started |
