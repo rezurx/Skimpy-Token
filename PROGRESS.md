@@ -176,7 +176,6 @@ BASESCAN_API_KEY=your-basescan-api-key-here
 
 ### Short Term
 - [ ] Advanced tokenomics (demurrage, decay)
-- [ ] Reputation-Splitting Tokens (RST) integration
 - [ ] Enhanced governance features (delegation, advanced proposal types)
 
 ### Long Term  

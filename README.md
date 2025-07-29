@@ -11,12 +11,33 @@ SKIMPY is a **sandbox token project** for exploring smart contract development, 
 
 ## Project Purpose
 
-SKIMPY exists to:
+**Skimpy Token (SKMP)** is a deliberately **minimal, test-only ERC-20 token** designed as a **pilot project** for practicing blockchain development workflows. The core experiment is to create and deploy a token as cheaply as possible, validating the entire workflow on a minimal budget.
 
-- Learn and test Ethereum-compatible token development using Hardhat
-- Prototype features like burn vaults, dynamic tokenomics, and modular DAO hooks
-- Serve as a timestamped public proof of capability before shipping $RES and RSTs
-- Help the developer learn GitHub, Discord, and smart contract deployment workflows
+### Primary Purpose
+- **Learning and Testing**: Master the end-to-end process of deploying blockchain assets on a minimal budget (e.g., ~$0.40 in gas fees).
+- **Alpha Test**: Serve as the foundation for future, more legitimate token projects.
+
+### Technical Objectives
+- Practice **Solidity + Hardhat workflows**.
+- Test deployments on **Base Sepolia** (testnet) and **Base Mainnet**.
+- Verify contracts on **Basescan**.
+- Add token metadata (logo, symbol, website).
+- Optionally create a tiny liquidity pool (~$1 on Aerodrome).
+
+### Strategic Context
+Skimpy is explicitly **not a product** but rather a **dry run** that will lay the groundwork for:
+- Future serious token launches (RWA-backed, memecoins, governance assets).
+- CI/CD token workflows and security checks.
+- UX systems like airdrop scripts and LP reward mechanisms.
+- Integration into a larger **AI-powered micro-business incubator**.
+
+### Key Characteristics
+- **Non-promoted**: No marketing or community building.
+- **Test-only**: A pure technical exercise.
+- **Minimal Cost**: Designed to prove deployment is possible on a shoestring budget.
+- **Foundation Building**: Once this works end-to-end, the developer plans to "scale and launch serious tokens."
+
+Essentially, Skimpy Token is a **proof-of-concept** to validate the technical infrastructure before deploying real projects with actual utility and community value.
 
 ---
 

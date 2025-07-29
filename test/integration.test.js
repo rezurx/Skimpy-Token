@@ -3,10 +3,10 @@ const { ethers } = require("hardhat");
 
 describe("Governance Integration", function () {
   let skimpy, timelock, governor, burnVault, newBurnVault;
-  let owner, addr1;
+  let owner, addr1, addr2;
 
   beforeEach(async function () {
-    [owner, addr1] = await ethers.getSigners();
+    [owner, addr1, addr2] = await ethers.getSigners();
 
     // Deploy BurnVault
     const BurnVault = await ethers.getContractFactory("BurnVault");
@@ -81,5 +81,51 @@ describe("Governance Integration", function () {
     await governor.execute([await skimpy.getAddress()], [0], [transferCallData], descriptionHash);
 
     expect(await skimpy.burnVault()).to.equal(newBurnVaultAddress);
+  });
+
+  it("should allow a user to delegate their voting power and vote", async function () {
+    // Transfer some tokens from owner to addr1
+    const transferAmount = ethers.parseUnits("10000", 18);
+    await skimpy.connect(owner).transfer(addr1.address, transferAmount);
+
+    // addr1 delegates its voting power to addr2
+    await skimpy.connect(addr1).delegate(addr2.address);
+
+    // owner delegates to itself to activate its own voting power
+    await skimpy.connect(owner).delegate(owner.address);
+
+    // Check voting power after delegation
+    // Note: getVotes returns the voting power at the *previous* block.
+    // We need to mine a block for the delegation to be registered.
+    await ethers.provider.send("evm_mine", []);
+    
+    // addr2's votes should now include addr1's balance
+    expect(await skimpy.getVotes(addr2.address)).to.equal(transferAmount);
+    // addr1's votes should be 0
+    expect(await skimpy.getVotes(addr1.address)).to.equal(0);
+
+    // Create a proposal
+    const newBurnVaultAddress = await newBurnVault.getAddress();
+    const transferCallData = skimpy.interface.encodeFunctionData("setBurnVault", [newBurnVaultAddress]);
+    const description = "Proposal #3: Change burn vault with delegated votes";
+    
+    const tx = await governor.connect(owner).propose(
+      [await skimpy.getAddress()],
+      [0],
+      [transferCallData],
+      description
+    );
+    const receipt = await tx.wait();
+    const proposalId = receipt.logs.find(e => e.fragment.name === 'ProposalCreated').args.proposalId;
+
+    // Wait for the voting delay to pass
+    await ethers.provider.send("evm_mine", []);
+
+    // addr2 casts a vote using the delegated power
+    await governor.connect(addr2).castVote(proposalId, 1); // 1 for "For"
+
+    const proposalVotes = await governor.proposalVotes(proposalId);
+    // The forVotes should equal the amount delegated from addr1
+    expect(proposalVotes.forVotes).to.equal(transferAmount);
   });
 });
