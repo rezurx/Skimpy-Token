@@ -83,6 +83,18 @@ skimpy-token/
 
 ---
 
+## Tokenomics: Demurrage (Token Decay)
+
+SKIMPY tokens are designed with a **demurrage** mechanism, meaning their balance slowly decreases over time. This feature is implemented to:
+
+* **Discourage Hoarding:** Incentivize active use and circulation of tokens rather than holding them passively.
+* **Stimulate Activity:** Encourage participation within the ecosystem by creating a cost for inaction.
+* **Experimentation:** Serve as a practical experiment in dynamic tokenomics, aligning with the project's goal as a "public learning lab."
+
+The decay is applied "just-in-time" whenever a token balance is accessed (e.g., during transfers or when checking `balanceOf`). The current decay rate is set to approximately 20% annually.
+
+---
+
 ## License
 
 This project uses the **Business Source License (BUSL)**:

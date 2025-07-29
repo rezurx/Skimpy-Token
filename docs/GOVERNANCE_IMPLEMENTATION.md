@@ -48,3 +48,5 @@ You can delegate your votes by calling the `delegate` function on the `Skimpy` t
 *   **Delegate to another address:** Call `delegate(ANOTHER_ADDRESS)`. This is useful if you want a more active community member to vote on your behalf.
 
 Once you have delegated your votes, you will be able to create proposals and vote on existing ones.
+
+**Note on Demurrage:** Due to the token's demurrage mechanism, your SKMP balance (and thus your voting power) will slowly decrease over time. It is important to delegate your votes and participate in governance in a timely manner to ensure your voting power is accurately reflected.

@@ -174,8 +174,19 @@ BASESCAN_API_KEY=your-basescan-api-key-here
   - [x] Test governance with existing faucet bot and burn vault systems
   - [x] Verify full end-to-end governance workflows
 
+### ✅ Phase 5: Advanced Tokenomics (Completed - 2025-07-29)
+- [x] **Demurrage (Token Decay) Implementation**
+  - Implemented time-based token decay mechanism in `contracts/Skimpy.sol`
+  - Decay rate set to approximately 20% annually
+  - Just-in-time decay application during balance access and transfers
+  - Updated tests to handle decay with tolerance-based assertions
+- [x] **Test Suite Fixes for Demurrage**
+  - Fixed failing tests in `test/skimpy.test.js` and `test/integration.test.js`
+  - Increased tolerance from 0.001 ETH to 0.01 ETH for decay-affected assertions
+  - Updated deployment test to use `closeTo` instead of `equal` for owner balance
+  - All 16 tests now passing successfully
+
 ### Short Term
-- [ ] Advanced tokenomics (demurrage, decay)
 - [ ] Enhanced governance features (delegation, advanced proposal types)
 
 ### Long Term  
