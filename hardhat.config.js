@@ -27,18 +27,15 @@ module.exports = {
     //   accounts: [PRIVATE_KEY],
     //   gasPrice: "auto"
     // },
-    // baseSepolia: {
-    //   url: `https://base-sepolia.g.alchemy.com/v2/${ALCHEMY_API_KEY}`,
-    //   chainId: 84532,
-    //   accounts: [PRIVATE_KEY],
-    //   gasPrice: "auto"
-    // }
+    baseSepolia: {
+      url: `https://base-sepolia.g.alchemy.com/v2/${ALCHEMY_API_KEY}`,
+      chainId: 84532,
+      accounts: [PRIVATE_KEY],
+      gasPrice: "auto"
+    }
   },
   etherscan: {
-    apiKey: {
-      base: BASESCAN_API_KEY,
-      baseSepolia: BASESCAN_API_KEY
-    },
+    apiKey: BASESCAN_API_KEY,
     customChains: [
       {
         network: "base",

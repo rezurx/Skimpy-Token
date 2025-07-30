@@ -119,10 +119,13 @@ See [`docs/dev-log.md`](docs/dev.log.md) for detailed progress notes.
 | ERC-20 Token Logic | ✅ Working      |
 | Hardhat Framework  | ✅ Configured   |
 | Testing Suite      | ✅ Done      |
-| Discord Webhook    |  Planned     |
-| Burn Vault Design  |  Drafting    |
-| Faucet Bot         |  Not started |
-| GitHub Workflow    |  Live        |
+| Discord Webhook    | ✅ Live        |
+| Burn Vault Design  | ✅ Complete    |
+| Faucet Bot         | ✅ Complete    |
+| GitHub Workflow    | ✅ Live        |
+| Governance System  | ✅ Complete    |
+| Base Sepolia Deploy| ✅ Live        |
+| Contract Verification| ✅ Complete  |
 
 ---
 
