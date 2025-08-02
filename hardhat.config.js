@@ -21,12 +21,12 @@ module.exports = {
     hardhat: {
       chainId: 1337
     },
-    // base: {
-    //   url: `https://base-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}`,
-    //   chainId: 8453,
-    //   accounts: [PRIVATE_KEY],
-    //   gasPrice: "auto"
-    // },
+    base: {
+      url: `https://base-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}`,
+      chainId: 8453,
+      accounts: [PRIVATE_KEY],
+      gasPrice: "auto"
+    },
     baseSepolia: {
       url: `https://base-sepolia.g.alchemy.com/v2/${ALCHEMY_API_KEY}`,
       chainId: 84532,

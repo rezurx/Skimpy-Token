@@ -1,5 +1,9 @@
 # SKIMPY Token
 
+<div align="center">
+  <img src="https://ipfs.io/ipfs/bafybeigy3vvqw6wjitrfrzmolrrx5q6fsdpllpxtx5mrqxyefe74hpc63a" alt="SKIMPY Token Logo" width="200"/>
+</div>
+
 > ⚠️ **Disclaimer**  
 This is an experimental project intended for education and personal development.  
 SKIMPY Token (SKMP) is not promoted, marketed, or intended for public use — but it is deployed on a public blockchain and permissionless by nature.  
@@ -124,8 +128,11 @@ See [`docs/dev-log.md`](docs/dev.log.md) for detailed progress notes.
 | Faucet Bot         | ✅ Complete    |
 | GitHub Workflow    | ✅ Live        |
 | Governance System  | ✅ Complete    |
-| Base Sepolia Deploy| ✅ Live        |
+| Base Mainnet Deploy| 🚀 LIVE        |
 | Contract Verification| ✅ Complete  |
+| Aerodrome Trading  | 🚀 LIVE        |
+| CoinGecko Submission| ⏳ Under Review |
+| Logo Integration   | ✅ Complete    |
 
 ---
 
