@@ -128,6 +128,7 @@ See [`docs/dev-log.md`](docs/dev.log.md) for detailed progress notes.
 | Faucet Bot         | ✅ Complete    |
 | GitHub Workflow    | ✅ Live        |
 | Governance System  | ✅ Complete    |
+| Tally DAO Interface| 🚀 LIVE        |
 | Base Mainnet Deploy| 🚀 LIVE        |
 | Contract Verification| ✅ Complete  |
 | Aerodrome Trading  | 🚀 LIVE        |
@@ -158,11 +159,30 @@ npx hardhat run scripts/deploy.js
 
 ---
 
-## Governance Use (Later)
+## 🏛️ Governance
 
-This project will evolve into a prototype for:
+**Skimpy DAO is now LIVE!** Token holders can participate in governance through:
 
-* Burn-gated voting
+### **Tally Interface**
+- **DAO Page**: https://www.tally.xyz/gov/skimpy-dao
+- **Features**: Proposal creation, voting, delegation
+- **Voting Power**: Based on SKMP token holdings
+- **Quorum**: 4% of total token supply
+
+### **Governance Contracts**
+- **SkimpyGovernor**: `0x5F0d5Be2aE4962f4178c96a5C24FEf2Bae14D09c`
+- **SkimpyTimelock**: `0x32B53089A2f797c40168AaD32575e188A75a97fE`
+- **Voting Period**: 1 week
+- **Timelock Delay**: 1 hour
+
+### **How to Participate**
+1. **Get SKMP tokens** (trade on Aerodrome DEX)
+2. **Delegate voting power** to yourself or another address
+3. **Create proposals** or vote on existing ones via Tally
+4. **Execute passed proposals** after timelock delay
+
+Future governance evolution:
+* Burn-gated voting mechanisms
 * On-chain identity using Reputation-Splitting Tokens (RSTs)
 * Faucet-based loyalty scoring
 

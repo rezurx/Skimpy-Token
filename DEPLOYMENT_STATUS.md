@@ -17,6 +17,7 @@
 
 - **SkimpyGovernor**: `0x5F0d5Be2aE4962f4178c96a5C24FEf2Bae14D09c`
   - ✅ Verified: https://basescan.org/address/0x5F0d5Be2aE4962f4178c96a5C24FEf2Bae14D09c#code
+  - ✅ **Tally Interface**: https://www.tally.xyz/gov/skimpy-dao
   - Voting Delay: 1 block
   - Voting Period: 45818 blocks (~1 week)
   - Quorum: 4% of total supply
